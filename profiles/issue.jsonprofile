@@ -1,0 +1,11 @@
+{
+  "type_filter": [
+    "IssueCommentEvent"
+  ],
+  "columns": [
+    "actor/login",
+    "payload/issue/title",
+    "payload/issue/user/site_admin",
+    "payload/issue/created_at"
+  ]
+}
