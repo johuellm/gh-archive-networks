@@ -1,0 +1,4 @@
+
+# unpack
+gunzip *.gz
+
