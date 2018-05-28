@@ -8,4 +8,3 @@ Example runs:
   python 04_extract.py "profiles/issue.jsonprofile" "archive/*.json"
 
 ```
-

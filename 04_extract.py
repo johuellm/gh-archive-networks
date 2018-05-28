@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+
 
 # Defaul target or output file
 output_file = "output.csv"
@@ -14,7 +18,7 @@ def get_files(pattern):
   """ Get the files to extract data from.
 
   Args:
-  pattern (str): Glob pattern for getting the files.
+    pattern (str): Glob pattern for getting the files.
 
   Returns:
     list: A list of filenames. """
@@ -59,6 +63,11 @@ def process(file, writer, profile):
 
 
 def read_jsonprofile(filename):
+  """ reads the jsonprofile entry . The json profile, contains two keys, first is type_filter, which is a list of event types to process.
+      Second is columns, which contains the columns paths, separated by a backslash /.
+
+    Args:
+      filename (str): Filename of the jsonprofile."""
   with open(filename, "rb") as profile:
     return json.load(profile)
 
@@ -89,7 +98,6 @@ if __name__ == "__main__":
   profile = read_jsonprofile(sys.argv[1])
 
   # get list of all files
-  print sys.argv[2]
   files = get_files(sys.argv[2])
 
   # set output file
@@ -108,7 +116,3 @@ if __name__ == "__main__":
     for filename in files:
       with open(filename, 'r') as file:
         process(file, writer, profile)
-
-
-
-#     archive/2017-01-01-*.json
