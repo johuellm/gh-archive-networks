@@ -44,8 +44,8 @@ def process(file, writer, profile):
   for line in file:
     obj = json.loads(line)
 
-    # check type
-    if obj["type"] not in profile["type_filter"]:
+    # check type, if provided
+    if '*' not in profile["type_filter"] and obj["type"] not in profile["type_filter"]:
       continue
 
     # extract all selected columns
@@ -53,11 +53,15 @@ def process(file, writer, profile):
     for column in profile["columns"]:
 
       # split path for recursive extraction
-      path = column.split("/")
-      value = obj
-      for p in path:
-        value = value.get(p)
-      result_entry.append(value)
+      try:
+        path = column.split("/")
+        value = obj
+        for p in path:
+          value = value.get(p)
+        result_entry.append(value)
+      except AttributeError as e:
+        # TODO use explicit columns for each type as they should be standardized per type
+        result_entry.append("")
     writer.writerow(result_entry)
 
 
@@ -102,7 +106,7 @@ if __name__ == "__main__":
 
   # set output file
   if len(sys.argv) == 4:
-    output_file = sys.argv[4]
+    output_file = sys.argv[3]
 
   # create output file
   with open(output_file, 'wb') as output:

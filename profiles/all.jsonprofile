@@ -1,0 +1,37 @@
+{
+  "type_filter": [
+    "*"
+  ],
+  "columns": [
+    "type",
+    "created_at",
+    "actor/login",
+    "org/login",
+    "repo/name",
+    "payload/forkee/full_name",
+    "payload/forkee/owner/login",
+    "payload/issue/user/login",
+    "payload/issue/assignee/login",
+    "payload/issue/assignees/login",
+    "payload/issue/milestone/creator/login",
+    "payload/comment/user/login",
+    "payload/pull_request/user/login",
+    "payload/pull_request/milestone/creator/login",
+    "payload/pull_request/head/user/login",
+    "payload/pull_request/head/repo/full_name",
+    "payload/pull_request/head/repo/owner/login",
+    "payload/pull_request/base/user/login",
+    "payload/pull_request/base/repo/full_name",
+    "payload/pull_request/base/repo/owner/login",
+    "payload/pull_request/merged_by/login",
+    "payload/pages/page_name",
+    "payload/issue/id",
+    "payload/issue/number",
+    "payload/comment/id",
+    "payload/comment/pull_request_review_id",
+    "payload/comment/commit_id",
+    "payload/comment/original_commit_id",
+    "payload/pull_request/id",
+    "payload/pull_request/number"
+  ]
+}
