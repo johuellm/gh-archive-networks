@@ -3,11 +3,11 @@
     "*"
   ],
   "columns": [
+    "repo/name",
     "type",
     "created_at",
     "actor/login",
     "org/login",
-    "repo/name",
     "payload/forkee/full_name",
     "payload/forkee/owner/login",
     "payload/issue/user/login",

@@ -101,7 +101,7 @@ if __name__ == "__main__":
   # import profile page (TODO, maybe use correct configuration files in the future)
   profile = read_jsonprofile(sys.argv[1])
 
-  # get list of all files
+  # get list of all filenames
   files = get_files(sys.argv[2])
 
   # set output file
@@ -117,6 +117,13 @@ if __name__ == "__main__":
     writer.writerow(profile["columns"])
 
     # iterate over files and append to output stream
+    current_file = 0.0
+    total_files = len(files)
+    threshold = int(0.05 * total_files) # for progress print every 5% of data
     for filename in files:
+      if current_file % threshold == 0:
+        print "Processing file %d of %d (%d%%)" % (current_file, total_files, (current_file/total_files)*100)
+      current_file = current_file + 1
+
       with open(filename, 'r') as file:
         process(file, writer, profile)
