@@ -36,7 +36,7 @@ if __name__ == "__main__":
   output_file = input_file + ".parsed.csv"
 
   result = []
-  projections = [{},{}] # pagename, issueid
+  projections = [{},{},{},{},{},{}] # page_name, issueid, commentid, pullrequestreviewid, commitid, pullrequestid
 
   # parse input file
   with open(input_file, 'rb') as csvinput:
@@ -48,25 +48,27 @@ if __name__ == "__main__":
     for row in reader:
 
       # Create multiple entries if available
-      base_entry = [entry_index, row[4], row[0], row[1], row[2]] # autoincrement_id, repo, type, time, source, target
+      base_entry = [entry_index, row[3], row[0], row[1], row[2]] # autoincrement_id, repo, type, time, source, target
       for target in get_logins(row):
         result.append(base_entry + [target])
         entry_index = entry_index + 1
 
       # Create projections for conversations (issues,forks, and identify users participating in the same conversation)
-      if row[22].strip():
-        if row[22] in projections[1]:
-          projections[1][row[22]].append(row)
-        else:
-          projections[1][row[22]] = [row,]
-
+      projection_index = 0
+      for column_index in [21,22,24,25,26,28]:   # page_name, issueid, commentid, pullrequestreviewid, commitid, pullrequestid
+        if row[column_index].strip():
+          if row[column_index] in projections[projection_index]:
+            projections[projection_index][row[column_index]].append(row)
+          else:
+            projections[projection_index][row[column_index]] = [row,]
+        projection_index = projection_index + 1
 
   # project key, values
   for projection in projections:
     for key, rows in projection.iteritems():
       previous_authors = set()   # edges are only drawn to previous commenters in a conversation
       for row in rows:
-        base_entry = [entry_index, row[4], row[0], row[1], row[2]] # autoincrement_id, repo, type, time, source, target
+        base_entry = [entry_index, row[3], row[0], row[1], row[2]] # autoincrement_id, repo, type, time, source, target
         for prev_author in previous_authors:  # edges to all previous commenters in the thread
           if prev_author != row[2]:   # skip self-loops
             result.append(base_entry + [prev_author])

@@ -1,4 +1,4 @@
 
 # unpack
-gunzip *.gz
 
+gunzip *.gz
