@@ -100,6 +100,7 @@ if __name__ == "__main__":
 
   # import profile page (TODO, maybe use correct configuration files in the future)
   profile = read_jsonprofile(sys.argv[1])
+  print sys.argv[1]
 
   # get list of all filenames
   files = get_files(sys.argv[2])
@@ -120,6 +121,7 @@ if __name__ == "__main__":
     current_file = 0.0
     total_files = len(files)
     threshold = int(0.05 * total_files) # for progress print every 5% of data
+    if threshold == 0: threshold = 1
     for filename in files:
       if current_file % threshold == 0:
         print "Processing file %d of %d (%d%%)" % (current_file, total_files, (current_file/total_files)*100)
@@ -127,3 +129,6 @@ if __name__ == "__main__":
 
       with open(filename, 'r') as file:
         process(file, writer, profile)
+
+
+#python 04_extract.py "profiles/login.jsonprofile" "archive/*.json" people_working_on_newyearseve.csv

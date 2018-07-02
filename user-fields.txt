@@ -20,9 +20,10 @@ CreateEvent
 
 type
 created_at
-
 actor/login
 org/login
+repo/name
+
 payload/forkee/full_name
 payload/forkee/owner/login
 payload/issue/user/login
@@ -39,7 +40,6 @@ payload/pull_request/base/user/login
 payload/pull_request/base/repo/full_name
 payload/pull_request/base/repo/owner/login
 payload/pull_request/merged_by/login
-repo/name
 
 payload/pages/page_name
 payload/issue/id
