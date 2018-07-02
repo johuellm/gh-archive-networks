@@ -23,3 +23,7 @@ Some other example runs for the `04_extract.py`:
   # Extracts all details relevant to to create a social network
   python 04_extract.py "profiles/all.jsonprofile" "archive/*.json"
 ```
+
+## Requirements
+
+The execution of this scripts require python2.7 with csvkit and unicodecsv.
